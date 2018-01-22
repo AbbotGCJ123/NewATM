@@ -40,6 +40,23 @@ public class InTheUsers {
 			e.printStackTrace();
 		}
 	}
+	public void fwrite(ArrayList<CommonUsers> userRAMList,File file) {
+		
+		try {
+			
+			FileOutputStream fos = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			//将内存集合写到文件中
+			oos.writeObject(userRAMList);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	//读取出users.txt中 的users  放到usersList中
 	public ArrayList<CommonUsers> greader(File file) {
