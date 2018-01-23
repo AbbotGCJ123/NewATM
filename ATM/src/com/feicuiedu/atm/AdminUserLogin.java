@@ -26,7 +26,7 @@ public class AdminUserLogin {
 						System.out.println("当前用户：" + aUsers.getAdminName());
 						boolean bool3 = true;
 						while (bool3) {
-							System.out.println("1、注册普通 用户         2、删除普通用户     3、退出当前用户");
+							System.out.println("1、注册普通 用户         2、删除普通用户     3、退出当前用户     4、修改用户");
 							int scaNum1 = scanner.nextInt();
 							if (scaNum1 == 1) {
 								// 注册用户
@@ -49,14 +49,18 @@ public class AdminUserLogin {
 								bool3 = true;
 							} else if (scaNum1 == 2) {
 								// 删除普通用户；
-								bool3 = false;
-								
+								DeleteCommonUser  dc =  new DeleteCommonUser();
+								dc.deleteUser();
 								//删除后，返回到1、注册普通 用户         2、删除普通用户 界面  
 								bool3 = true;
 							}else if (scaNum1 == 3) {
 								//退出当前用户
 								LoginBusiness lb = new LoginBusiness();
 								lb.login();
+							}else if (scaNum1 == 4) {
+								UpdateCommonUser uc = new UpdateCommonUser();
+								uc.updateUser();
+								bool3 = true;
 							}else {
 								bool3 = true;
 								System.out.println("输入错误！请从新选择：");

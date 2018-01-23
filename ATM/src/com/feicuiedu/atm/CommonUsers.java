@@ -31,6 +31,9 @@ public class CommonUsers implements Serializable {
 	// 地址ַ
 	private String usersSite;
 
+	private String userWatercourse;
+
+
 	public CommonUsers(String accountNumber, String password, String username, int sex, String idCardNo, int education,
 			double money, String usersSite) {
 		super();
@@ -114,5 +117,12 @@ public class CommonUsers implements Serializable {
 	public void setUsersSite(String usersSite) {
 		this.usersSite = usersSite;
 	}
+	//用户流水
+	public String getUserWatercourse() {
+		return userWatercourse;
+	}
 
+	public void setUserWatercourse(String userWatercourse) {
+		this.userWatercourse = userWatercourse;
+	}
 }

@@ -1,5 +1,7 @@
 package com.feicuiedu.atm;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MemuBusiness {
@@ -28,8 +30,20 @@ public class MemuBusiness {
 				ta.transfer(user);
 			}else if (selectNum == 4) {
 				//查看账户信息
-				bln = false;
-				
+				bln = true;
+				SaveWatercourseBusiness swb = new SaveWatercourseBusiness();
+				InTheUsers itu = new InTheUsers();
+				ArrayList<ArrayList<CommonUsers>> listlist = itu.greader1(new File("document" + File.separator + "Watercourse.txt"));
+				for (ArrayList<CommonUsers> arrayList : listlist) {
+					for (CommonUsers commonUsers : arrayList) {
+						if(user.getUsername() == commonUsers.getUsername()) {
+							System.out.println(commonUsers.getUserWatercourse());
+						}else {
+							System.out.println("无user");
+						}
+					}
+				}
+				System.out.println("显示完成，返回菜单！");
 			}else {
 				bln = true;
 				System.out.println("输入错误，请从新输入：");

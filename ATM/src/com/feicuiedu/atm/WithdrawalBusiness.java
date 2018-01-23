@@ -1,11 +1,14 @@
 package com.feicuiedu.atm;
 
+import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class WithdrawalBusiness{
 
 	public void widthdrawal(CommonUsers user){
 		Scanner sca = new Scanner(System.in);
+		ArrayList<CommonUsers> userlist = new InTheUsers().greader(new File("document" + File.separator + "users.txt"));
 		boolean b = true;
 		while(b){
 			System.out.println("请输入要取款的金额：");
@@ -15,11 +18,18 @@ public class WithdrawalBusiness{
 			if(tb.verifyMulriple(fetchMoney)){
 				//判断余额是否够取款的数目
 				if(tb.isNotSufficientFunds(user,fetchMoney)){
+					SaveWatercourseBusiness swb = new SaveWatercourseBusiness();
+					swb.saveWatercourse(userlist);
+					userlist.remove(user);
+					ArrayList<CommonUsers> nowlist = userlist;
 					double getmoney = user.getMoney();
 					double setmoney = getmoney - fetchMoney;
 					user.setMoney(setmoney);
+					//取款成功后要把用户操作的信息存到文件中
+					user.setUserWatercourse(user.getUsername() + "取出:" + fetchMoney +" RMB");
+					nowlist.add(user);
+					new InTheUsers().fwrite(nowlist, new File("document" + File.separator + "users.txt"));
 					System.out.println("取款成功，返回菜单");
-					
 					MemuBusiness mb = new MemuBusiness();
 					mb.memu(user);
 					b = false;

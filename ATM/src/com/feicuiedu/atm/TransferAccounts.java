@@ -34,6 +34,9 @@ public class TransferAccounts {
 							bool1 = false;
 							transferUser.setMoney(transferUser.getMoney() + transferMoney); 
 							loginUser.setMoney(loginUser.getMoney() + transferMoney);
+							//将没更新的旧集合存放到一个集合中保存下来
+							SaveWatercourseBusiness swb = new SaveWatercourseBusiness();
+							swb.saveWatercourse(userlist);
 							System.out.println("转账成功！");
 							//将原来文件中的被转账的用户移除
 							userlist.remove(transferUser);
@@ -41,6 +44,9 @@ public class TransferAccounts {
 							itu.fwrite(userlist, file);
 							//再将移除后的剩下的对象  给arraylist
 							ArrayList<CommonUsers> arrayList = itu.greader(file);
+							//将操作完成后的流水从新给user的属性赋值
+							loginUser.setUserWatercourse(loginUser.getUsername() + "转给" + transferUser.getUsername() + transferMoney + "RMB");
+							transferUser.setUserWatercourse(transferUser.getUsername() + "收到" + loginUser.getUsername() + transferMoney + "RMB");
 							//然后再将被转账的用户加入到arraylist 集合中，完成对对象的重新赋值
 							arrayList.add(transferUser);
 							arrayList.add(loginUser);

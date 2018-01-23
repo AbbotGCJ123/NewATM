@@ -57,6 +57,23 @@ public class InTheUsers {
 			e.printStackTrace();
 		}
 	}
+	public void fwrite1(ArrayList<ArrayList<CommonUsers>> userRAMList,File file) {
+		
+		try {
+			
+			FileOutputStream fos = new FileOutputStream(file);
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
+			//将内存集合写到文件中
+			oos.writeObject(userRAMList);
+			
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	//读取出users.txt中 的users  放到usersList中
 	public ArrayList<CommonUsers> greader(File file) {
@@ -76,6 +93,27 @@ public class InTheUsers {
 			e.printStackTrace();
 		}
 		//将这个存放了内存 集合的filelist 集合 返回出去
+		
+		return fileList;
+	}
+	public ArrayList<ArrayList<CommonUsers>> greader1(File file) {
+		//创建一个集合用来暂时存放从 文件中取出的用户
+		ArrayList<ArrayList<CommonUsers>> fileList = new ArrayList<>();
+		try {
+			ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file));
+			//将获取出来的内存集合放到暂时存放的集合filelist中
+			@SuppressWarnings("unchecked")
+			ArrayList<ArrayList<CommonUsers>> readObject = (ArrayList<ArrayList<CommonUsers>>) ois.readObject();
+			fileList =readObject;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//将这个存放了内存 集合的filelist 集合 返回出去
+		
 		return fileList;
 	}
 }
